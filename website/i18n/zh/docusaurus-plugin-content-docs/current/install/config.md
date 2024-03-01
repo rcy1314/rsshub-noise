@@ -209,7 +209,7 @@ RSSHub 支持使用访问密钥 / 码，允许清单和拒绝清单三种方式�
 
 ## 功能特性
 
-:::tip 测试特性
+:::tip[测试特性]
 
 这个板块控制的是一些新特性的选项，他们都是**默认关闭**的。如果有需要请阅读对应说明后按需开启
 
@@ -220,6 +220,8 @@ RSSHub 支持使用访问密钥 / 码，允许清单和拒绝清单三种方式�
 `FILTER_REGEX_ENGINE`: 控制 [通用参数 -> 内容过滤](/zh/parameter#内容过滤) 使用的正则引擎。可选`[re2, regexp]`，默认`re2`。我们推荐公开实例不要调整这个选项，这个选项目前主要用于向后兼容。
 
 `ALLOW_USER_SUPPLY_UNSAFE_DOMAIN`: 允许用户为路由提供域名作为参数。建议公共实例不要调整此选项，开启后可能会导致 [服务端请求伪造（SSRF）](https://owasp.org/www-community/attacks/Server_Side_Request_Forgery)
+
+`MEDIA_PROXY_KEY`: 内置多媒体代理的访问密钥
 
 ## 其他应用配置
 
@@ -457,13 +459,20 @@ RSSHub 支持使用访问密钥 / 码，允许清单和拒绝清单三种方式�
 
 用户相关路由
 
--   `SPOTIFY_REFRESHTOKEN`：用户在此 Spotify 应用的 refresh token。可以利用 [此 gist](https://gist.github.com/outloudvi/d1bbeb5e989db5385384a223a7263744) 获取。
+-   `SPOTIFY_REFRESHTOKEN`：用户在此 Spotify 应用的 refresh token。可以利用 [alecchendev](https://github.com/alecchendev/spotify-refresh-token) 制作的 [spotify-refresh-token](https://alecchen.dev/spotify-refresh-token/) 获取。
+
+:::tip
+
+记得为 `Personal Top Items` 或 `Personal Saved Tracks` 分别勾选 `user-top-read` 或 `user-library-read` scope。
+
+:::
 
 ### Telegram
 
 贴纸包路由：[Telegram 机器人](https://telegram.org/blog/bot-revolution)
 
 -   `TELEGRAM_TOKEN`: Telegram 机器人 token
+-   `TELEGRAM_SESSION`: 可通过运行 `node lib/routes/telegram/tglib/client.js`
 
 ### Twitter
 
@@ -552,6 +561,10 @@ Web 版认证 token 和 iOS 内购回执认证 token 只需选择其一填入即
 ### 今日热榜
 
 -   `TOPHUB_COOKIE`: 今日热榜登录后的 cookie，目前只需要 `itc_center_user=...` 以获取原始链接
+
+### 米游社
+
+-   `MIHOYO_COOKIE`：登录米游社后的 cookie，用于获取用户关注动态时间线。
 
 ### 南方周末
 

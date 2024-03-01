@@ -209,7 +209,7 @@ It is also valid to contain route parameters, e.g. `/weibo/user/2612249974`.
 
 ## Features
 
-:::tip Experimental features
+:::tip[Experimental features]
 
 Configs in this sections are in beta stage, and **are turn off by default**. Please read corresponded description and turn on if necessary.
 
@@ -220,6 +220,8 @@ Configs in this sections are in beta stage, and **are turn off by default**. Ple
 `FILTER_REGEX_ENGINE`: Define Regex engine used in [Parameters->filtering](/parameter#filtering). Valid value are `[re2, regexp]`. Default value is `re2`. We suggest public instance should leave this value to default, and this option right now is mainly for backward compatibility.
 
 `ALLOW_USER_SUPPLY_UNSAFE_DOMAIN`: allow users to provide a domain as a parameter to routes that are not in their allow list, respectively. Public instances are suggested to leave this value default, as it may lead to [Server-Side Request Forgery (SSRF)](https://owasp.org/www-community/attacks/Server_Side_Request_Forgery)
+
+`MEDIA_PROXY_KEY`: the access key for internal media proxy.
 
 ## Other Application Configurations
 
@@ -478,13 +480,20 @@ For scientific journal routes
 
 For user data related routes
 
--   `SPOTIFY_REFRESHTOKEN`: The refresh token of the user from the Spotify application. Check [this gist](https://gist.github.com/outloudvi/d1bbeb5e989db5385384a223a7263744) for detailed information.
+-   `SPOTIFY_REFRESHTOKEN`: The refresh token of the user from the Spotify application. You can obtain it through [spotify-refresh-token](https://alecchen.dev/spotify-refresh-token/) by [alecchendev](https://github.com/alecchendev/spotify-refresh-token).
+
+:::tip
+
+Remember to check `user-top-read` and `user-library-read` in the scope for `Personal Top Items` and `Personal Saved Tracks` respectively.
+
+:::
 
 ### Telegram
 
 [Bot application](https://telegram.org/blog/bot-revolution)
 
--   `TELEGRAM_TOKEN`: Telegram bot token
+-   `TELEGRAM_TOKEN`: Telegram bot token for stickerpack feeds
+-   `TELEGRAM_SESSION`: for video and file streaming, can be acquired by running `node lib/routes/telegram/tglib/client.js`
 
 ### Twitter
 
@@ -569,6 +578,10 @@ Web 版认证 token 和 iOS 内购回执认证 token 只需选择其一填入即
 [申请地址](https://id.qweather.com/#/register?redirect=https%3A%2F%2Fconsole.qweather.com)
 
 -   `HEFENG_KEY`:API key
+
+### 米游社
+
+-   `MIHOYO_COOKIE`：登录米游社后的 cookie，用于获取用户关注动态时间线。
 
 ### 南方周末
 
